@@ -7,7 +7,7 @@ const users = require('../../models/user_model');
 // post
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const name = new users({
             name: req.body.name
         });
@@ -16,25 +16,26 @@ router.post('/', async (req, res) => {
             status: 200,
             message: "Data added successfully"
         });
-    } catch(err) {
+    } catch (err) {
         return res.status(400).json({
             message: err.message
         })
     }
 });
 
+
 // Get users
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
+        const name = await users.find({}).select('-_id -__v')
         res.json({
             status: 200,
-            // message: "Get all user's data",
-            message: req.body
+            message: name
         });
-        console.log(req.body);
     } catch (err) {
-        return res.status(400).json({ message: err.message });
+        return res.status(400).json({ message: err.message })
     }
 });
+
 
 module.exports = router;
