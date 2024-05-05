@@ -8,10 +8,14 @@ const users = require('../../models/user_model');
 router.post('/', async (req, res) => {
     try {
         // console.log(req.body);
-        const name = new users({
-            name: req.body.name
+        const user = new users({
+            name: req.body.name,
+            email: req.body.email,
+            purpose: req.body.purpose,
+            program: req.body.program,
+            role: req.body.role
         });
-        await name.save();
+        await user.save();
         res.json({
             status: 200,
             message: "Data added successfully"
