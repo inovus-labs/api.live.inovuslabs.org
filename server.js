@@ -1,10 +1,9 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 
 // env
 require('dotenv').config();
-
 
 // DB
 const db = require('./config/db');
@@ -19,6 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+// cors
+app.use(cors())
 
 // Base URL (/)
 const routes = require('./routes')
